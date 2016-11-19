@@ -1,4 +1,4 @@
-This is tutorial of howto install MySQL on MacOS Siera
+How to install MySQL on MacOS Siera
 ======
 
 
@@ -53,7 +53,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
 mysql -h 'localhost' -u 'admin' -p
 ```
 
-Login to <db_name> directly
+Login to ```<db_name>``` directly
 ```
 mysql -h 'localhost' -u 'root' -p <db_name>
 ```
@@ -98,3 +98,8 @@ mysql> SHOW TABLES;
 Stored procedures
 -----
 https://dev.mysql.com/doc/sakila/en/sakila-structure-procedures.html
+
+
+GUI tools
+-----
+https://sequelpro.com
