@@ -67,6 +67,8 @@ mysql> SHOW tables;
 
 Create user
 -----
+http://dev.mysql.com/doc/refman/5.7/en/adding-users.html
+
 ```
 mysql> CREATE USER 'admin'@'localhost' IDENTIFIED BY 'some_pass';
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
