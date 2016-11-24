@@ -1,0 +1,1 @@
+var nameIs = 'power.js';

@@ -1,0 +1,1 @@
+var nameIs = 'main12.js';
