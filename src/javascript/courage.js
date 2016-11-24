@@ -1,1 +1,0 @@
-var thisIs = 'courage.js';

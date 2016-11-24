@@ -1,1 +1,0 @@
-var nameIs = 'wisdom.js';

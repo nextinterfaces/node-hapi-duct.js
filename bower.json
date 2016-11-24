@@ -1,0 +1,8 @@
+{
+  "name": "misc-web",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery-ui": "~1.12.1",
+    "normalize-css": "~2.1.3"
+  }
+}
