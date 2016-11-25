@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/nextinterfaces/misc#readme",
   "devDependencies": {
+    "dustjs-helpers": "^1.7.3",
+    "dustjs-linkedin": "^2.7.4",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-cache": "^0.4.5",
@@ -34,8 +36,11 @@
     "gulp-sourcemaps": "^1.9.1",
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
+    "hapi": "^15.2.0",
+    "hapi-dust": "^2.0.0",
     "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1",
-    "tiny-lr": "^1.0.3"
+    "tiny-lr": "^1.0.3",
+    "vision": "^4.1.0"
   }
 }

@@ -3,46 +3,41 @@
 const Path = require('path');
 const Hapi = require('hapi');
 const dust = require('dustjs-linkedin');
-const dustHelpers = require('dustjs-helpers');
-const fs  = require('fs');
-var path = require('path');
-var appDir = path.dirname(require.main.filename);
+const fs = require('fs');
+const appDir = Path.dirname(require.main.filename);
+const Vision = require('vision');
 
 
 // Create a server with a host and port
 const server = new Hapi.Server();
-server.connection({ 
-    host: 'localhost', 
-    port: 8000 
+server.connection({
+    host: 'localhost',
+    port: 8000
 });
 
 
-// server.register(require('hapi-dust'), (err) => {
-//
-//     // Hoek.assert(!err, err);
-//
-//     // server.views({
-//     //     engines: {
-//     //         html: require('handlebars')
-//     //     },
-//     //     relativeTo: __dirname,
-//     //     path: 'templates'
-//     // });
-// });
+server.register(Vision, (err) => {
+    if (err) {
+        console.log("Cannot register vision ");
+    }
 
-// server.views({
-//     engines: { dust: require('hapi-dust') },
-//     relativeTo: Path.join(__dirname),
-//     path: 'path/to/templates',
-//     partialsPath: 'path/to/partials',
-//     helpersPath: 'path/to/helpers',
-// });
+    server.views({
+        engines: {dust: require('hapi-dust')},
+        relativeTo: Path.join(__dirname) + '/../',
+        path: 'templates',
+        partialsPath: 'templates/partials',
+        helpersPath: 'templates/helpers'
+    });
+
+    // Hoek.assert(!err, err);
+});
+
 
 server.route({
     method: 'GET',
     path: '/',
     handler: function (request, reply) {
-        reply('Hello, world!');
+        reply.view('hello', { world: 'Dusting World!' });
     }
 });
 
@@ -51,12 +46,12 @@ server.route({
     path: '/{name}',
     handler: function (request, reply) {
 
-        //loading not compiled dust template and output it
-        var src =fs.readFileSync(path.join(__dirname, './templates') + '/hello.dust', 'utf8');
+        //loading not compiled dust template and outputting it
+        var src = fs.readFileSync(Path.join(__dirname, '../templates') + '/hello.dust', 'utf8');
 
         var compiled = dust.compile(src, 'hello');
         dust.loadSource(compiled);
-        dust.render('hello', { world: request.params.name }, function(err, out) {
+        dust.render('hello', {world: request.params.name}, function (err, out) {
             console.log(out);
             reply(out);
         });
