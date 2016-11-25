@@ -26,9 +26,9 @@ expect = require('gulp-expect-file'),
     server = lr();
 
 var PATH = {
-    js: ['src/js/**/*.js'],
-    sass: ['src/scss/**/*.scss'],
-    html: ['src/*.html', '!src/test.html'],   // !file -> skips (ignores) the file
+    js: ['web/js/**/*.js'],
+    sass: ['web/scss/**/*.scss'],
+    html: ['web/*.html', '!web/test.html'],   // !file -> skips (ignores) the file
     dist: 'dist/'
 };
 
@@ -101,13 +101,13 @@ gulp.task('watch', function () {
         });
         //
         // // Watch .js files
-        // gulp.watch('src/scripts/**/*.js', function (event) {
+        // gulp.watch('web/scripts/**/*.js', function (event) {
         //     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
         //     gulp.run('scripts');
         // });
         //
         // // Watch image files
-        // gulp.watch('src/images/**/*', function (event) {
+        // gulp.watch('web/images/**/*', function (event) {
         //     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
         //     gulp.run('images');
         // });
