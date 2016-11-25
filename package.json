@@ -24,6 +24,7 @@
     "gulp-cache": "^0.4.5",
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.1",
+    "gulp-dust": "^3.0.0",
     "gulp-expect-file": "0.0.7",
     "gulp-imagemin": "^3.1.1",
     "gulp-jshint": "^2.0.4",

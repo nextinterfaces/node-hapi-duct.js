@@ -11,8 +11,8 @@
  */
 
 
-var gulp = require('gulp');
-expect = require('gulp-expect-file'),
+const gulp = require('gulp'),
+    expect = require('gulp-expect-file'),
     jshint = require('gulp-jshint'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -23,15 +23,22 @@ expect = require('gulp-expect-file'),
     clean = require('gulp-clean'),
     livereload = require('gulp-livereload'),
     lr = require('tiny-lr'),
-    server = lr();
+    server = lr(),
+    dust = require('gulp-dust');
 
-var PATH = {
+const PATH = {
     js: ['web/js/**/*.js'],
     sass: ['web/scss/**/*.scss'],
     html: ['web/*.html', '!web/test.html'],   // !file -> skips (ignores) the file
     dist: 'dist/'
 };
 
+//-------
+gulp.task('build-templates', () => {
+    return gulp.src('templates/*')
+        .pipe(dust())
+        .pipe(gulp.dest('dist/templates'));
+});
 
 //-------
 gulp.task('default', ['watch']);
@@ -46,7 +53,7 @@ gulp.task('clean', function () {
 gulp.task('build-html', function () {
     return gulp.src(PATH.html)
         .pipe(expect(PATH.html))	// validate and fails if missing file
-        .pipe(gulp.dest(PATH.dist + 'assets'));
+        .pipe(gulp.dest(PATH.dist + 'web'));
 });
 
 //-------
@@ -56,8 +63,8 @@ gulp.task('build-css', function () {
         .pipe(sass())
         .pipe(minifycss())
         .pipe(sourcemaps.write()) // Add the map to modified source.
-        .pipe(gulp.dest(PATH.dist + 'assets/css'));
-        // .pipe(livereload(server));
+        .pipe(gulp.dest(PATH.dist + 'web/css'));
+    // .pipe(livereload(server));
 });
 
 //-------
@@ -76,7 +83,7 @@ gulp.task('build-js', ['jshint'], function () {
         //only uglify if gulp is ran with '--type production'
         .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(PATH.dist + 'assets/js'));
+        .pipe(gulp.dest(PATH.dist + 'web/js'));
 });
 
 //-------
@@ -92,13 +99,13 @@ gulp.task('watch', function () {
         console.log('server started on port 35729');
 
         gulp.watch(PATH.js, ['build-js']);
-        // gulp.watch(PATH.sass, ['build-css']);
+        gulp.watch(PATH.sass, ['build-css']);
 
         // // Watch .scss files
-        gulp.watch(PATH.sass, function (event) {
-            console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-            gulp.start('build-css');
-        });
+        // gulp.watch(PATH.sass, function (event) {
+        //     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+        //     gulp.start('build-css');
+        // });
         //
         // // Watch .js files
         // gulp.watch('web/scripts/**/*.js', function (event) {
@@ -117,4 +124,4 @@ gulp.task('watch', function () {
 });
 
 //-------
-gulp.task('build', ['build-html', 'build-js', 'build-css']);
+gulp.task('build', ['build-html', 'build-templates', 'build-js', 'build-css']);
