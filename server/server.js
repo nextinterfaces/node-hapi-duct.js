@@ -20,6 +20,7 @@ server.register(Vision, (err) => {
     if (err) {
         console.log("Cannot register vision ");
     }
+    // Hoek.assert(!err, err);
 
     server.views({
         engines: {dust: require('hapi-dust')},
@@ -29,7 +30,6 @@ server.register(Vision, (err) => {
         helpersPath: 'templates/helpers'
     });
 
-    // Hoek.assert(!err, err);
 });
 
 
@@ -37,7 +37,7 @@ server.route({
     method: 'GET',
     path: '/',
     handler: function (request, reply) {
-        reply.view('hello', { world: 'Dusting World!' });
+        reply.view('hello', {world: 'Dusting World!'});
     }
 });
 
@@ -46,11 +46,20 @@ server.route({
     path: '/{name}',
     handler: function (request, reply) {
 
+        // function registerPartial(name, path) {
+        //     var fs = require('fs')
+        //     var file = fs.readFileSync(path, { encoding: 'utf8' })
+        //     dust.module.registerPartial(name, file)
+        // }
+        //
+        // registerPartial('_include', __dirname+'/../templates/_include.dust')
+        // registerPartial('_layout', __dirname+'/../templates/_layout.dust')
+
         //loading not compiled dust template and outputting it
         var src = fs.readFileSync(Path.join(__dirname, '../templates') + '/hello.dust', 'utf8');
-
-        var compiled = dust.compile(src, 'hello');
+        var compiled = dust.compile(src, 'hello'); // bind the name of the 'hello' template
         dust.loadSource(compiled);
+
         dust.render('hello', {world: request.params.name}, function (err, out) {
             console.log(out);
             reply(out);
