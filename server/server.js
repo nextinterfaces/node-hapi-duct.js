@@ -41,6 +41,19 @@ server.route({
     }
 });
 
+
+server.route({
+    method: 'GET',
+    path: '/people',
+    handler: function (request, reply) {
+        var data = {
+            "title": "Famous People",
+            "names": [{"name": "Larry"}, {"name": "Curly"}, {"name": "Moe"}]
+        };
+        reply.view('people', data);
+    }
+});
+
 server.route({
     method: 'GET',
     path: '/{name}',
