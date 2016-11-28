@@ -1,23 +1,38 @@
-Gulp and Bower skeleton project
----
+# Jump start web skeleton project using
+ * Gulp
+ * Bower
+ * Sass
+ * Node.js
+ * Hapi.js
+ * Duct.js 
 
-#### Web Server
+
+#### Setup
+```
+npm install
+bower install
+```
+
+#### Using sample Web Server for gulp testing
 ```
 python -m SimpleHTTPServer 9090
 ```
 
-##### Gulp watch
+##### Gulp tasks:
 ```
+gulp clean
 gulp watch
+gulp build*< -html | -js | -css | -templates >
 ```
 
-##### Gulp build
+## Running Node & Hapi.js and Dust.js templates
 ```
-gulp build
+node ./server/server.js
 ```
 
-#### Bower
+#### Dust.js templates
 ```
-bower install
+gulp build-templates
 ```
+Templates are being compiled to dist/ folder and can be reused by both web and node server
 

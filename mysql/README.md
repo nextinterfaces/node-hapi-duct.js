@@ -1,4 +1,4 @@
-How to install MySQL on MacOS Siera
+MySQL quick start setup on MacOS (Siera)
 ======
 
 
