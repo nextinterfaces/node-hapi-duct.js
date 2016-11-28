@@ -6,6 +6,7 @@ const dust = require('dustjs-linkedin');
 const fs = require('fs');
 const appDir = Path.dirname(require.main.filename);
 const Vision = require('vision');
+const Promise = require('bluebird');
 
 
 // Create a server with a host and port
@@ -18,7 +19,7 @@ server.connection({
 
 server.register(Vision, (err) => {
     if (err) {
-        console.log("Cannot register vision ");
+        console.log('Cannot register vision ');
     }
     // Hoek.assert(!err, err);
 
@@ -81,6 +82,27 @@ server.route({
     }
 });
 
+
+server.route({
+    method: 'GET',
+    path: '/promise',
+    handler: function (request, reply) {
+        console.log('Start of route. Reading a file...');
+
+        Promise.promisifyAll(fs);
+        // Now you can use fs as if it was designed to use bluebird promises from the beginning
+
+        fs.readFileAsync(Path.join(__dirname) + '/../README.md1111', 'utf8')
+            .then((data) => {
+                reply('<code><pre>' + data + '</pre></code>');
+            })
+            .catch((err) => {
+                console.log(err);
+                reply(err);
+            });
+        console.log('End of route.');
+    }
+});
 
 // Start the server
 server.start((err) => {

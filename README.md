@@ -34,5 +34,5 @@ node ./server/server.js
 ```
 gulp build-templates
 ```
-Templates are being compiled to dist/ folder and can be reused by both web and node server
+Templates are being compiled to dist/ folder and can be reused by both browser client rendering or node server rendering
 

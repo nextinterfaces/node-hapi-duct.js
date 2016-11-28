@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/nextinterfaces/misc#readme",
   "devDependencies": {
+    "bluebird": "^3.4.6",
     "dustjs-helpers": "^1.7.3",
     "dustjs-linkedin": "^2.7.4",
     "gulp": "^3.9.1",
