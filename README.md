@@ -4,7 +4,7 @@
  * Sass
  * Node.js
  * Hapi.js
- * Duct.js 
+ * Dust.js 
 
 
 #### Setup
